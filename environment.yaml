@@ -1,0 +1,13 @@
+channels:
+  - pytorch
+  - defaults
+  - nvidia
+dependencies:
+  - python=3.10
+  - pip
+  # - pytorch-cuda=11.7
+  - numpy
+  # - pip:
+  #   - torch~=2.0.1
+  #   - diffusers~=0.16.1
+  #   - einops~=0.3.0

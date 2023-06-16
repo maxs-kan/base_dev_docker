@@ -1,0 +1,35 @@
+version: "3.9"
+services:
+  stable-diffusion:
+    build:
+      context: .
+      # secrets:
+      #   - nexus_pypi_netrc
+      # args:
+      #   PYPI_USER: ${PYPI_USER}
+    image: diffusion-video
+    container_name: diffusion-video-dev
+    stdin_open: true
+    tty: true
+    ports:
+      - "8000:8888"
+    volumes:
+      - ./:/home/workspace
+    command: bash
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+    env_file: .env
+    environment:
+      CUDA_VISIBLE_DEVICES: 0
+      UID: ${UID:-1000}
+      GID: ${GID:-1000}
+      #for wsl curent bug
+      NVIDIA_DISABLE_REQUIRE: true
+    # secrets:
+    #   nexus_pypi_netrc:
+    #     file: ./.netrc
